@@ -6,7 +6,7 @@ use League\OAuth2\Client\Provider\ResourceOwnerInterface;
 
 class YandexResourceOwner implements ResourceOwnerInterface
 {
-    private $response;
+    private array $response;
 
     /**
      * Creates a new instance of YandexResourceOwner class.
@@ -31,7 +31,7 @@ class YandexResourceOwner implements ResourceOwnerInterface
      *
      * @return string|null
      */
-    public function getNickname()
+    public function getNickname(): ?string
     {
         return $this->response['login'] ?: null;
     }
@@ -41,7 +41,7 @@ class YandexResourceOwner implements ResourceOwnerInterface
      *
      * @return string|null
      */
-    public function getEmail()
+    public function getEmail(): ?string
     {
         return $this->response['default_email'] ?: null;
     }
@@ -51,7 +51,7 @@ class YandexResourceOwner implements ResourceOwnerInterface
      *
      * @return string|null
      */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->response['display_name'] ?: null;
     }
@@ -61,7 +61,7 @@ class YandexResourceOwner implements ResourceOwnerInterface
      *
      * @return string|null
      */
-    public function getFirstName()
+    public function getFirstName(): ?string
     {
         return $this->response['first_name'] ?: null;
     }
@@ -71,7 +71,7 @@ class YandexResourceOwner implements ResourceOwnerInterface
      *
      * @return string|null
      */
-    public function getLastName()
+    public function getLastName(): ?string
     {
         return $this->response['last_name'] ?: null;
     }
@@ -81,7 +81,7 @@ class YandexResourceOwner implements ResourceOwnerInterface
      *
      * @return string|null
      */
-    public function getGender()
+    public function getGender(): ?string
     {
         return $this->response['sex'] ?: null;
     }
@@ -89,7 +89,7 @@ class YandexResourceOwner implements ResourceOwnerInterface
     /**
      * {@inheritdoc}
      */
-    public function toArray()
+    public function toArray(): array
     {
         return $this->response;
     }

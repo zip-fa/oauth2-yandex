@@ -4,6 +4,7 @@ namespace Aego\OAuth2\Client\Provider;
 
 use League\OAuth2\Client\Provider\AbstractProvider;
 use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
+use League\OAuth2\Client\Provider\ResourceOwnerInterface;
 use League\OAuth2\Client\Token\AccessToken;
 use League\OAuth2\Client\Tool\BearerAuthorizationTrait;
 use Psr\Http\Message\ResponseInterface;
@@ -15,7 +16,7 @@ class Yandex extends AbstractProvider
     /**
      * {@inheritdoc}
      */
-    public function getBaseAuthorizationUrl()
+    public function getBaseAuthorizationUrl(): string
     {
         return 'https://oauth.yandex.ru/authorize';
     }
@@ -23,7 +24,7 @@ class Yandex extends AbstractProvider
     /**
      * {@inheritdoc}
      */
-    public function getBaseAccessTokenUrl(array $params)
+    public function getBaseAccessTokenUrl(array $params): string
     {
         return 'https://oauth.yandex.ru/token';
     }
@@ -31,7 +32,7 @@ class Yandex extends AbstractProvider
     /**
      * {@inheritdoc}
      */
-    public function getResourceOwnerDetailsUrl(AccessToken $token)
+    public function getResourceOwnerDetailsUrl(AccessToken $token): string
     {
         return 'https://login.yandex.ru/info?format=json&oauth_token=' . $token->getToken();
     }
@@ -39,7 +40,7 @@ class Yandex extends AbstractProvider
     /**
      * {@inheritdoc}
      */
-    protected function getDefaultScopes()
+    protected function getDefaultScopes(): array
     {
         return [];
     }
@@ -47,7 +48,7 @@ class Yandex extends AbstractProvider
     /**
      * {@inheritdoc}
      */
-    protected function checkResponse(ResponseInterface $response, $data)
+    protected function checkResponse(ResponseInterface $response, $data): void
     {
         if (isset($data['error'])) {
             throw new IdentityProviderException(
@@ -61,7 +62,7 @@ class Yandex extends AbstractProvider
     /**
      * {@inheritdoc}
      */
-    protected function createResourceOwner(array $response, AccessToken $token)
+    protected function createResourceOwner(array $response, AccessToken $token): ResourceOwnerInterface
     {
         return new YandexResourceOwner($response);
     }
