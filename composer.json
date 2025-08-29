@@ -1,5 +1,5 @@
 {
-    "name": "aego/oauth2-yandex",
+    "name": "zip-fa/oauth2-yandex",
     "description": "Yandex provider for league/oauth2-client",
     "license": "MIT",
     "authors": [
